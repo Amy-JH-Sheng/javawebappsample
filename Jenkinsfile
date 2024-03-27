@@ -20,7 +20,7 @@ node {
   
     stage('deploy') {
       def resourceGroup = 'jenkins-get-started-rg'
-      def webAppName = 'veryGood'
+      def webAppName = 'verygood'
       // login Azure
       withCredentials([usernamePassword(credentialsId: 'AzureServicePrincipal', passwordVariable: 'AZURE_CLIENT_SECRET', usernameVariable: 'AZURE_CLIENT_ID')]) {
        sh '''
@@ -32,7 +32,7 @@ node {
       def pubProfilesJson = sh script: "az webapp deployment list-publishing-profiles -g $resourceGroup -n $webAppName", returnStdout: true
       def ftpProfile = getFtpPublishProfile pubProfilesJson
       // upload package
-      sh "az webapp deploy --resource-group 'jenkins-get-started-rg' --name 'veryGood' --src-path target/calculator-1.0.war --type war"      // log out
+      sh "az webapp deploy --resource-group 'jenkins-get-started-rg' --name 'verygood' --src-path target/calculator-1.0.war --type war"      // log out
       sh 'az logout'
     }
   }
